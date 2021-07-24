@@ -1,6 +1,6 @@
 import React from "react";
 
-class CanvasPixels extends React.Component {
+class HexagonColorPicker extends React.Component {
 
     constructor(props) {
         super(props);
@@ -70,4 +70,4 @@ class CanvasPixels extends React.Component {
     }
 }
 
-export default CanvasPixels;
+export default HexagonColorPicker;
