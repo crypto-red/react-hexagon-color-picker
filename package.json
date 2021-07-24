@@ -1,6 +1,6 @@
 {
   "name": "react-hexagon-color-picker",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Lightweight hexagon color picker for react",
   "main": "dist/index.js",
   "homepage": "https://github.com/crypto-red/react-hexagon-color-picker#readme",
@@ -49,6 +49,8 @@
   "sideEffects": false,
   "private": false,
   "scripts": {
-    "build": "webpack"
+    "start": "webpack --watch",
+    "build": "webpack",
+    "prepublish": "npm run build"
   }
 }

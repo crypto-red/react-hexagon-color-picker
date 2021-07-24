@@ -60,10 +60,49 @@ class HexagonColorPicker extends React.Component {
 
                     {paths.map((element, index) => {
 
-                        return <path style={{pointerEvents: "auto"}} onClick={() => {this._set_color(element.fill)}} key={index} fill={element.fill} d={element.d} />
+                        return <path style={{pointerEvents: "auto", cursor: "pointer"}} onClick={() => {this._set_color(element.fill)}} key={index} fill={element.fill} d={element.d} />
                     })}
 
-                    <path style={{pointerEvents: "auto"}} onClick={(event) => {this._on_color_click(event, this.state.color)}} fill={this.state.color} d="M216 251.25L200.25 260l-15.75-8.75v-17.5l15.75-8.75 15.75 8.75z" />
+                    <defs>
+                        <filter
+                            id="prefix__b"
+                            x="-200%"
+                            y="-200%"
+                            width="400%"
+                            height="400%"
+                            filterUnits="objectBoundingBox"
+                            colorInterpolationFilters="sRGB"
+                        >
+                            <feGaussianBlur
+                                xmlns="http://www.w3.org/2000/svg"
+                                in="SourceGraphic"
+                                stdDeviation={2.147}
+                            />
+                            <feOffset
+                                xmlns="http://www.w3.org/2000/svg"
+                                result="pf_100_offsetBlur"
+                            />
+                            <feFlood
+                                xmlns="http://www.w3.org/2000/svg"
+                                floodColor={this.state.color}
+                                floodOpacity={0.65}
+                            />
+                            <feComposite
+                                xmlns="http://www.w3.org/2000/svg"
+                                in2="pf_100_offsetBlur"
+                                operator="in"
+                                result="pf_100_dropShadow"
+                            />
+                            <feBlend
+                                xmlns="http://www.w3.org/2000/svg"
+                                in="SourceGraphic"
+                                in2="pf_100_dropShadow"
+                            />
+                        </filter>
+                    </defs>
+                    <g filter="url(#prefix__b)">
+                        <path style={{pointerEvents: "auto", cursor: "pointer"}} onClick={(event) => {this._on_color_click(event, this.state.color)}} fill={this.state.color} d="M213.75 243.75L198 252.5l-15.75-8.75v-17.5L198 217.5l15.75 8.75z" />
+                    </g>
                 </g>
             </svg>
         );
