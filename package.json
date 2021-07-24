@@ -1,0 +1,34 @@
+{
+  "name": "react-hexagon-color-picker",
+  "version": "0.0.1",
+  "description": "Lightweight hexagon color picker for react",
+  "main": "index.js",
+  "homepage": "https://github.com/crypto-red/react-hexagon-color-picker#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/crypto-red/react-hexagon-color-picker"
+  },
+  "bugs": {
+    "url": "https://github.com/crypto-red/react-hexagon-color-picker/issues"
+  },
+  "author": "VIPERTECH",
+  "license": "MIT",
+  "keywords": [
+    "react",
+    "react-component",
+    "color-palette",
+    "color palette",
+    "color-picker",
+    "color picker",
+    "color",
+    "picker",
+    "hexagon"
+  ],
+  "sideEffects": false,
+  "private": false,
+  "scripts": {
+  },
+  "peerDependencies": {
+    "react": "^16.14.0"
+  }
+}
