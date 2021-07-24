@@ -9,7 +9,7 @@ class CanvasPixels extends React.Component {
         };
     };
 
-   componentWillReceiveProps(new_props) {
+    componentWillReceiveProps(new_props) {
 
         this.setState(new_props);
     }

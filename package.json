@@ -1,8 +1,8 @@
 {
   "name": "react-hexagon-color-picker",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "Lightweight hexagon color picker for react",
-  "main": "index.js",
+  "main": "index.min.js",
   "homepage": "https://github.com/crypto-red/react-hexagon-color-picker#readme",
   "repository": {
     "type": "git",
@@ -24,9 +24,24 @@
     "picker",
     "hexagon"
   ],
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.1",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-react-html-attrs": "^2.0.0",
+    "babel-plugin-transform-class-properties": "^6.3.13",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
+    "babel-preset-stage-0": "^6.3.13",
+    "uglify-js": "^3.12.8",
+    "webpack": "^3.5.5",
+    "webpack-dev-server": "^2.6.1"
+  },
   "sideEffects": false,
   "private": false,
   "scripts": {
+    "build": "webpack --env.prod && uglifyjs ./index.min.js -o ./index.min.js -c -m"
   },
   "peerDependencies": {
     "react": "^16.14.0"
