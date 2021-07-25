@@ -6,14 +6,11 @@ Lightweight hexagon color picker for react full svg
 
 ```
 
-// This is the props
-this.state = {
-    color: props.color,
-};
-
-// Theses are the callback
-this.props.onColorChange(color) // hex -> #fff
-
-this.props.onColorClick(event, color) // Event, color hex
+<HexagonalColorPicker
+    style={{width: "100%", height: 400, margin: 16}}
+    color={_current_color}
+    onColorChange={this._handle_current_color_change}
+    onColorClick={this._handle_color_menu_open}
+/>
 
 ```
