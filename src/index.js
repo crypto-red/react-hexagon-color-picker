@@ -5,7 +5,7 @@ class HexagonColorPicker extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            color: props.color,
+            color: props.color || "#ffffff",
         };
     };
 
@@ -13,6 +13,12 @@ class HexagonColorPicker extends React.Component {
 
         this.setState(new_props);
     }
+
+    _format_color = (color) => {
+
+        // If color equals #fff -> #ffffff
+        return color.length === 4 ? "#" + color.charAt(1) + color.charAt(1) + color.charAt(2) + color.charAt(2) + color.charAt(3) + color.charAt(3): color;
+    };
 
     _set_color = (color) => {
 
@@ -24,14 +30,14 @@ class HexagonColorPicker extends React.Component {
 
         color = color || this.state.color;
 
-        if(this.props.onColorChange) { this.props.onColorChange(color)}
+        if(this.props.onColorChange) { this.props.onColorChange(this._format_color(color))}
     };
 
     _on_color_click = (event, color) => {
 
         color = color || this.state.color;
 
-        if(this.props.onColorClick) { this.props.onColorClick(event, color)}
+        if(this.props.onColorClick) { this.props.onColorClick(event, this._format_color(color))}
 
     };
 
@@ -56,50 +62,54 @@ class HexagonColorPicker extends React.Component {
                         <path d="M0 0h234v260H0z" />
                     </clipPath>
                 </defs>
+                <defs>
+                    <filter
+                        id="prefix__b"
+                        x="-200%"
+                        y="-200%"
+                        width="400%"
+                        height="400%"
+                        filterUnits="objectBoundingBox"
+                        colorInterpolationFilters="sRGB"
+                    >
+                        <feGaussianBlur
+                            xmlns="http://www.w3.org/2000/svg"
+                            in="SourceGraphic"
+                            stdDeviation={2.147}
+                        />
+                        <feOffset
+                            xmlns="http://www.w3.org/2000/svg"
+                            result="pf_100_offsetBlur"
+                        />
+                        <feFlood
+                            xmlns="http://www.w3.org/2000/svg"
+                            floodColor={"#000000"}
+                            floodOpacity={0.65}
+                        />
+                        <feComposite
+                            xmlns="http://www.w3.org/2000/svg"
+                            in2="pf_100_offsetBlur"
+                            operator="in"
+                            result="pf_100_dropShadow"
+                        />
+                        <feBlend
+                            xmlns="http://www.w3.org/2000/svg"
+                            in="SourceGraphic"
+                            in2="pf_100_dropShadow"
+                        />
+                    </filter>
+                </defs>
                 <g clipPath="url(#prefix__a)">
 
                     {paths.map((element, index) => {
 
-                        return <path style={{pointerEvents: "auto", cursor: "pointer"}} onClick={() => {this._set_color(element.fill)}} key={index} fill={element.fill} d={element.d} />
+                        return (
+                            element.fill === this.state.color ?
+                                <g filter="url(#prefix__b)"><path style={{pointerEvents: "auto", cursor: "pointer"}} onClick={() => {this._set_color(element.fill)}} key={index} fill={element.fill} d={element.d} /></g>:
+                                <path style={{pointerEvents: "auto", cursor: "pointer"}} onClick={() => {this._set_color(element.fill)}} key={index} fill={element.fill} d={element.d} />
+                        );
                     })}
 
-                    <defs>
-                        <filter
-                            id="prefix__b"
-                            x="-200%"
-                            y="-200%"
-                            width="400%"
-                            height="400%"
-                            filterUnits="objectBoundingBox"
-                            colorInterpolationFilters="sRGB"
-                        >
-                            <feGaussianBlur
-                                xmlns="http://www.w3.org/2000/svg"
-                                in="SourceGraphic"
-                                stdDeviation={2.147}
-                            />
-                            <feOffset
-                                xmlns="http://www.w3.org/2000/svg"
-                                result="pf_100_offsetBlur"
-                            />
-                            <feFlood
-                                xmlns="http://www.w3.org/2000/svg"
-                                floodColor={this.state.color}
-                                floodOpacity={0.65}
-                            />
-                            <feComposite
-                                xmlns="http://www.w3.org/2000/svg"
-                                in2="pf_100_offsetBlur"
-                                operator="in"
-                                result="pf_100_dropShadow"
-                            />
-                            <feBlend
-                                xmlns="http://www.w3.org/2000/svg"
-                                in="SourceGraphic"
-                                in2="pf_100_dropShadow"
-                            />
-                        </filter>
-                    </defs>
                     <g filter="url(#prefix__b)">
                         <path style={{pointerEvents: "auto", cursor: "pointer"}} onClick={(event) => {this._on_color_click(event, this.state.color)}} fill={this.state.color} d="M213.75 243.75L198 252.5l-15.75-8.75v-17.5L198 217.5l15.75 8.75z" />
                     </g>
