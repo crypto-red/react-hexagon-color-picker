@@ -2,13 +2,14 @@ import React from "react";
 import { hsl_to_hex } from "../utils/functions";
 
 
-class CanvasPixels extends React.Component {
+class HexagonalColorHue extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
             color: props.color,
             hue: props.hue || 0,
+            border: props.border || null,
         };
     };
 
@@ -61,7 +62,21 @@ class CanvasPixels extends React.Component {
 
     render() {
 
+        const { border } = this.state;
         const all_color_paths = this._get_color_paths_from_hue();
+
+        let border_props = {};
+        if(border !== null) {
+
+            border_props = {
+                vectorEffect: "non-scaling-stroke",
+                strokeWidth: "1",
+                stroke: border,
+                strokeLinejoin: "miter",
+                strokeLinecap: "square",
+                strokeMiterlimit: "2",
+            }
+        }
 
         return (
             <svg
@@ -87,7 +102,13 @@ class CanvasPixels extends React.Component {
 
                     {all_color_paths.map((element, index) => {
 
-                        return <path key={`all_color_paths_${index}`} style={{pointerEvents: "auto", cursor: "pointer"}} onClick={() => {this._set_hue(element.hue)}} fill={element.fill} d={element.d} />;
+                        return <path
+                            {...border_props}
+                            key={`all_color_paths_${index}`}
+                            style={{pointerEvents: "auto", cursor: "pointer"}}
+                            onClick={() => {this._set_hue(element.hue)}}
+                            fill={element.fill}
+                            d={element.d} />;
                     })}
                 </g>
             </svg>
@@ -95,4 +116,4 @@ class CanvasPixels extends React.Component {
     }
 }
 
-export default CanvasPixels;
+export default HexagonalColorHue;

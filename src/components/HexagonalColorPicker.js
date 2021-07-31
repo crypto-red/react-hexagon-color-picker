@@ -1,7 +1,7 @@
 import React from "react";
-import { hsl_to_hex, format_hex_color } from "../utils/functions";
+import { hsl_to_hex } from "../utils/functions";
 
-class CanvasPixels extends React.Component {
+class HexagonalColorPicker extends React.Component {
 
     constructor(props) {
         super(props);
@@ -166,4 +166,4 @@ class CanvasPixels extends React.Component {
     }
 }
 
-export default CanvasPixels;
+export default HexagonalColorPicker;

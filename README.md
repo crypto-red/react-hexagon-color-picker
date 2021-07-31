@@ -10,6 +10,7 @@ import { HexagonalColorPicker } from "react-hexagon-color-picker";
 <HexagonalColorPicker
     style={{width: "100%", height: 400, margin: 16}}
     color={_current_color} // "#ffffff"
+    border={null} // null || "#ffffff"
     onColorChange={this._handle_current_color_change} // (color: "#ffffff")
     onColorClick={this._handle_color_menu_open} // (Event: event, color: "#ffffff")
 />
@@ -27,12 +28,14 @@ import { HexagonalColorHue, HexagonalColorPicker } from "react-hexagon-color-pic
             style={{height: 400}}
             hue={_hue} // 0 - 360
             color={_current_color} // "#ffffff"
+            border={null} // null || "#ffffff"
             onColorChange={this._handle_current_color_change} // (color: "#ffffff")
             onColorClick={this._handle_color_menu_open}/> // (Event: event, color: "#ffffff")
     </div>
     <div style={{transform: "rotate(90deg)", margin: "16px 96px 16px 16px",}}>
         <HexagonalColorHue
             style={{height: 51}}
+            border={null} // null || "#ffffff"
             hue={_hue} 
             onHueChange={this._handle_hue_change}/> // (hue: 0-360)
     </div>
