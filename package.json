@@ -1,6 +1,6 @@
 {
   "name": "react-hexagon-color-picker",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Lightweight hexagon color picker for react",
   "main": "dist/index.js",
   "homepage": "https://github.com/crypto-red/react-hexagon-color-picker#readme",

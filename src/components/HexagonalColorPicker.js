@@ -8,6 +8,8 @@ class HexagonalColorPicker extends React.Component {
         this.state = {
             color: props.color,
             hue: props.hue || 0,
+            border: props.border || null,
+            highlight: props.highlight || null,
         };
     };
 
@@ -85,8 +87,22 @@ class HexagonalColorPicker extends React.Component {
 
     render() {
 
+        const { border, color, highlight } = this.state;
         const all_color_paths = this._get_color_paths_from_hue();
         const grey_color_paths = [{ fill: "#F8F8F8", d: "M36 240l-9 5-9-5v-10l9-5 9 5z" },  { fill: "#DDD", d: "M54 240l-9 5-9-5v-10l9-5 9 5z" },  { fill: "#B2B2B2", d: "M72 240l-9 5-9-5v-10l9-5 9 5z" },  { fill: "#7F7F7F", d: "M90 240l-9 5-9-5v-10l9-5 9 5z" },  { fill: "#5F5F5F", d: "M108 240l-9 5-9-5v-10l9-5 9 5z" },  { fill: "#333", d: "M126 240l-9 5-9-5v-10l9-5 9 5z" },  { fill: "#151515", d: "M144 240l-9 5-9-5v-10l9-5 9 5z" },  { fill: "#000000", d: "M162 240l-9 5-9-5v-10l9-5 9 5z" },  { fill: "#EAEAEA", d: "M45 255l-9 5-9-5v-10l9-5 9 5z" },  { fill: "#C8C8C8", d: "M63 255l-9 5-9-5v-10l9-5 9 5z" },  { fill: "#969696", d: "M81 255l-9 5-9-5v-10l9-5 9 5z" },  { fill: "#777", d: "M99 255l-9 5-9-5v-10l9-5 9 5z" },  { fill: "#4D4D4D", d: "M117 255l-9 5-9-5v-10l9-5 9 5z" },  { fill: "#292929", d: "M135 255l-9 5-9-5v-10l9-5 9 5z" },  { fill: "#0B0B0B", d: "M153 255l-9 5-9-5v-10l9-5 9 5z" }];
+
+        let border_props = {};
+        if(border !== null) {
+
+            border_props = {
+                vectorEffect: "non-scaling-stroke",
+                strokeWidth: "1",
+                stroke: border,
+                strokeLinejoin: "miter",
+                strokeLinecap: "square",
+                strokeMiterlimit: "2",
+            }
+        }
 
         return (
             <svg
@@ -148,12 +164,26 @@ class HexagonalColorPicker extends React.Component {
 
                     {all_color_paths.map((element, index) => {
 
-                        return <path key={`all_color_paths_${index}`} style={{pointerEvents: "auto", cursor: "pointer"}} onClick={() => {this._set_color(element.fill)}} fill={element.fill} d={element.d} />;
+                        const element_border_props = element.fill === color && highlight ? {...border_props, stroke: highlight}: border_props;
+
+                        return <path
+                            {...element_border_props}
+                            key={`all_color_paths_${index}`}
+                            style={{pointerEvents: "auto", cursor: "pointer"}}
+                            onClick={() => {this._set_color(element.fill)}}
+                            fill={element.fill}
+                            d={element.d} />;
                     })}
 
                     {grey_color_paths.map((element, index) => {
 
-                        return <path key={`grey_color_paths_${index}`} style={{pointerEvents: "auto", cursor: "pointer"}} onClick={() => {this._set_color(element.fill)}} fill={element.fill} d={element.d} />;
+                        return <path
+                            {...border_props}
+                            key={`grey_color_paths_${index}`}
+                            style={{pointerEvents: "auto", cursor: "pointer"}}
+                            onClick={() => {this._set_color(element.fill)}}
+                            fill={element.fill}
+                            d={element.d} />;
 
                     })};
 

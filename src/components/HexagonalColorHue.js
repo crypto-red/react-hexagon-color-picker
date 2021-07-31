@@ -10,6 +10,7 @@ class HexagonalColorHue extends React.Component {
             color: props.color,
             hue: props.hue || 0,
             border: props.border || null,
+            highlight: props.highlight || null,
         };
     };
 
@@ -62,7 +63,7 @@ class HexagonalColorHue extends React.Component {
 
     render() {
 
-        const { border } = this.state;
+        const { border, hue, highlight } = this.state;
         const all_color_paths = this._get_color_paths_from_hue();
 
         let border_props = {};
@@ -102,8 +103,10 @@ class HexagonalColorHue extends React.Component {
 
                     {all_color_paths.map((element, index) => {
 
+                        const element_border_props = element.hue === hue && highlight ? {...border_props, stroke: highlight}: border_props;
+
                         return <path
-                            {...border_props}
+                            {...element_border_props}
                             key={`all_color_paths_${index}`}
                             style={{pointerEvents: "auto", cursor: "pointer"}}
                             onClick={() => {this._set_hue(element.hue)}}
